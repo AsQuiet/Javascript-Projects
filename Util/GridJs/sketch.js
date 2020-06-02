@@ -1,7 +1,11 @@
 
-g = new Grid(10,10)
+g = new Grid(3,3)
 
-g.setAll(Math.random)
+function r() {
+    return Math.round((Math.random() + Number.EPSILON) * 100) / 100
+}
+
+g.setAll(r)
 
 console.log(g.getAll([
     {x:0, y:0},
@@ -20,4 +24,4 @@ console.log(g.getAllWrapAround([
 ]))
 
 
-console.log(g)
+console.log(g.toString())

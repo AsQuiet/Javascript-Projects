@@ -10,6 +10,18 @@ function Grid(cols, rows) {
 
 }
 
+Grid.prototype.toString = function() {
+    str = ""
+    for (let j = 0; j < this.rows; j++) {
+        for (let i = 0; i < this.cols; i++) {
+            str += (this.array[i][j]).toString() + "\t"
+        }
+        str += "\n"
+    }
+    return str
+
+}
+
 Grid.prototype.setAll = function(func) {
     for (let i = 0; i < this.cols; i++) {
         for (let j = 0; j < this.rows; j++) {
