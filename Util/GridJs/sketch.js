@@ -1,5 +1,5 @@
 
-g = new Grid(3,3)
+g = new Grid(3,5)
 
 function r() {
     return Math.round((Math.random() + Number.EPSILON) * 100) / 100
@@ -7,21 +7,7 @@ function r() {
 
 g.setAll(r)
 
-console.log(g.getAll([
-    {x:0, y:0},
-    {x:-1, y:0},
-    {x:1, y:0},
-    {x:1, y:1},
-    {x:-1, y:1}
-]))
 
-console.log(g.getAllWrapAround([
-    {x:0, y:0},
-    {x:-1, y:0},
-    {x:1, y:0},
-    {x:1, y:1},
-    {x:-1, y:1}
-]))
-
+console.log(g.getAll(g.getNeighboursEight(0,1)))
 
 console.log(g.toString())

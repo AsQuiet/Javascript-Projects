@@ -98,3 +98,62 @@ Grid.prototype.checkDimensions = function(x, y, log=false) {
     }
     return false
 }
+
+/**
+ * Returns the indices of the top, left, bottom and right neighbours of the given index.
+ */
+Grid.prototype.getNeighbours = function(x, y) {
+
+    return [
+        {
+            x: x,
+            y: y - 1
+        }, {
+            x: x + 1,
+            y: y
+        }, {
+            x: x,
+            y: y + 1
+        }, {
+            x: x - 1,
+            y: y
+        }
+    ]
+
+}
+
+/**
+ * Returns the indices of the top, top-right, right, bottom-right, bottom, bottom-left, left, and top-left neighbours of the given index.
+ */
+Grid.prototype.getNeighboursEight = function(x, y) {
+
+    return [
+        {
+            x: x,
+            y: y - 1
+        }, {
+            x: x + 1,
+            y: y - 1
+        }, {
+            x: x + 1,
+            y: y
+        }, {
+            x: x + 1,
+            y: y + 1
+        }, {
+            x: x,
+            y: y + 1
+        }, {
+            x: x - 1,
+            y: y + 1
+        }, {
+            x: x - 1,
+            y: y
+        }, {
+            x: x - 1,
+            y: y - 1
+        }
+    ]
+
+}
+
