@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "module": "commonjs"
+    },
+    "include": ["index.html", "js/main.js", "js/bookmarker.js"]
+}
