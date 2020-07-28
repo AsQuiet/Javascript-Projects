@@ -1,23 +1,16 @@
 // traveling salesperson without genetic algorithm
 
 let cities;
-
 let brute;
-
 
 function setup() {
 	createCanvas(600, 400)
 
-	// creating the cities
 	cities = new Cities(9)
-
-	// generating
 	cities.generateCities()
 
-	// brute forcing and checking all the options
 	brute = new Brute(cities)
-
-	console.log(brute.amtOfOrders)
+	console.log(brute.amtOfPossibleOrders)
 
 }
 
@@ -25,12 +18,8 @@ function setup() {
 function draw() {
 	background(51)
 
-	// drawing them
 	cities.show()
-
-	// running the brute force
 	brute.bruteforce()
-
 
 	// showing the progress 
 	let pr = str(brute.progress) + '%'
@@ -43,40 +32,22 @@ function draw() {
 
 function Brute(cities) {
 
-	// the orders it has checked
-	this.checked = []
+	this.checkedOrders = [] 
+	this.currentOrder = []
 
-	// the order it's checkign 
-	this.order = []
+	this.stdOrder = _.getRange(cities.amt)	// used to create random orders
 
-	// the standard order
-	this.stdOrder = _.getRange(cities.amt)
-
-	// the record order 
 	this.recordOrder = []
-
-	// the record distance
 	this.recordDistance = Infinity
 
-	// calculating the amount of possible orders 
-	this.amtOfOrders = 0
+	this.amtOfPossibleOrders = 0
 
-	// the cities objects
 	this.cities = cities
-
-	// how many orders have we checked
 	this.progress = 0
 
-	this.calcOrders = function() {
-
-		this.amtOfOrders = factorial(this.cities.amt)
-	}
-
+	this.calcOrders = function() { this.amtOfPossibleOrders = factorial(this.cities.amt) }
 	this.calcOrders()
 
-
-
-	// the main function
 	this.bruteforce = function() {
 
 		if (this.checked.length >= this.amtOfOrders) {
@@ -84,36 +55,12 @@ function Brute(cities) {
 			return;
 		}
 
-		let newOrder = _.shuffle(this.stdOrder)
-
-		while(true) {
-
-			if (this.checked.includes(newOrder)) {
-				newOrder = _.shuffle(this.stdOrder)
-			} else {
-				break;
-			}
-
-		}
-
-
+		let newOrder = this.getNewOrder()
 		this.checked.push(newOrder)
-
-		// drawing the newOrder
 		this.drawOrder(newOrder)
 
-		// calculatin the distance
-		let dst = 0
-		for (let i = 0; i < newOrder.length-1; i++) {
-			let index = newOrder[i]
-			let nextIndex = newOrder[i+1]
-			
-			let c1 = this.cities.cities[index]
-			let c2 = this.cities.cities[nextIndex]
-
-			dst += dist(c1.x, c1.y, c2.x, c2.y)
-
-		}
+		// calculating the distance
+		let dst = this.calcDistOfOrder(newOrder)
 
 		if (dst < this.recordDistance) {
 			this.recordDistance = dst
@@ -126,6 +73,35 @@ function Brute(cities) {
 
 	}
 
+	// fincding a new order that hasn't been checked
+	this.getNewOrder = function() {
+		let newOrder = _.shuffle(this.stdOrder)
+
+		while(true) {
+
+			if (this.checked.includes(newOrder)) {
+				newOrder = _.shuffle(this.stdOrder)
+			} else {
+				break;
+			}
+
+		}
+		return newOrder
+	}
+
+	// returns the distance of an order
+	this.calcDistOfOrder = function(order) {
+		let dst = 0
+		for (let i = 0; i < order.length-1; i++) {
+			
+			let c1 = this.cities.cities[order[i]]
+			let c2 = this.cities.cities[order[i+1]]
+
+			dst += dist(c1.x, c1.y, c2.x, c2.y)
+
+		}
+		return dst
+	}
 
 	// drawing a certain order
 	this.drawOrder = function(order, m) {
@@ -148,22 +124,6 @@ function Brute(cities) {
 
 }
 
-
-
-
-
 function factorial(n) {
   return n ? n * factorial(n - 1) : 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-// end
