@@ -21,44 +21,45 @@
             
             <div class = "row">
 
-                <div class = "col-sm-4">
+                <div class = "col-sm-2">
 
                 </div>
                 
-                <div class = "col-sm-4">
-                    <h2>Bookmarker</h2>
-                    <hr>
-
-                    <div class="bookmark">
-
-                            <div class="row">
-
-                                <div class="col-sm-6">
-                                    <a href="#" class="primary"><h5 class="bookmark_name">Youtube</h5></a>
-                                    <h5 class="bookmark_url">www.youtube.com</h5>
-                                </div>
-
-                                <div class="col-sm-6">
-
-                                    <!-- <button class="btn btn-primary bookmark_btn">Go</button>
-                                    <button class="btn btn-danger bookmark_btn">Delete</button> -->
-                                    
-                                    <p><a href="#" class="delete">Delete</a></p>
-                                    
-
-                                </div>
-
-                            </div>
-                      
-                    <hr>
-                    </div>
-
+                <div class = "col-sm-8" id="bookmark_spot">
                 </div>
                 
-                <div class = "col-sm-4">
+                <div class = "col-sm-2">
     
                 </div>
 
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+
+                <div class="col-sm-8">
+
+                    <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <!-- <label for="newBookmarkName">Bookmark Name</label> -->
+                            <input type="text" class="form-control" id="newBookmarkName" placeholder="name">
+                          </div>
+                          <div class="form-group col-md-7">
+                            <!-- <label for="newBookmarkURL">URL</label> -->
+                            <input type="text" class="form-control" id="newBookmarkURL" placeholder="url">
+                          </div>
+
+                          <div class="form-group col-md-1">
+                            <button onclick="add_new_bookmark()" class="btn btn-primary">add</button>
+                          </div>
+                        </div>
+
+                        
+                     </form>
+
+                </div>
             </div>
             
         </div>
